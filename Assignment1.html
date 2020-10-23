@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style type = "text/css">
+    /* Andrejs Romanovskis
+@version 27/02/2020*/    
+    
+/* sets initial design for the table 
+its background colors and borders/size
+*/
+
+    table, td, th {
+
+        border: solid 2px;
+        border-collapse: collapse;
+    }
+    tr{background: gray}
+    tr:nth-child(even){background-color: khaki}
+
+
+
+    th{background:red}
+
+
+
+    </style>
+
+    <title>Assignment1 Q1</title>
+
+    <script type = "text/javascript"> 
+
+        //variable x is used to increment when 
+        //rows are added so every row would be
+        //added from the bottom
+    var x = 1;
+        //decrements x variable so when row
+        //gets deleted next one can be added from the bottom
+    function decrement(){
+        x--;
+    }
+        //adds row to the bottom of the table
+        //with all the inputs from the form
+    function addRow(){
+        count1();
+        displayCount();
+        
+        var row = document.getElementById("myTable").insertRow(x);
+        x++;
+        var cell1 = row.insertCell(0);
+
+        var cell2 = row.insertCell(1);
+
+        var cell3 = row.insertCell(2);
+
+        var cell4 = row.insertCell(3);
+
+        var cell5 = row.insertCell(4);
+
+        var table = document.getElementById("myTable");
+
+        var fname = document.getElementById("fname").value;
+
+        var age = document.getElementById("age").value;
+
+        var inches = document.getElementById("inches").value;
+
+        var feet = document.getElementById("Feet").value;
+
+        var startDate = document.getElementById("startDate").value;
+
+        var height = feet + "'" + inches + "''";
+
+        cell1.innerHTML = fname;
+
+        cell2.innerHTML = age;
+
+        cell3.innerHTML = height;
+
+        cell4.innerHTML = startDate;
+        
+        cell5.innerHTML = "<input type\"button\" value = \"Delete\" onclick=\"deleteRow(this)\">";
+        
+        document.getElementById("newForm").reset();
+        
+    }
+        //deletes the row
+    function deleteRow(r) {
+            var i = r.parentNode.parentNode.rowIndex;
+            document.getElementById("myTable").deleteRow(i);
+            decrement();
+            count2();
+            displayCount();
+        }
+        //resets the form - makes it blank
+    function resetForm(){
+        document.getElementById("newForm").reset();
+    }
+        //checks age to be within 18-60
+    function checkAge(str){
+        age = parseInt(str);
+        if(isNaN(age) || age < 18 || age > 60){
+            alert(age + " is not valid age, it should be between 18 and 60")
+            resetForm();
+        }
+    }
+        //counts how many rows been added
+    var counter = 0;
+    var count1 = function(){
+        return counter = counter + 1;
+    }
+        //decrements count when row is deleted
+    var count2 = function(){
+        return counter = counter - 1;
+    }
+    // displays amount of rows in the table
+    function displayCount(){
+        document.getElementById("count").innerHTML = counter;
+    }
+    //not implemented yet
+    function checkStartDate(str){
+        
+    }
+
+    </script>
+
+</head>
+
+<body>
+    
+
+    <div id = "container">
+ <!-- creates form for all the inputs we will require from customer-->
+    <form id = "newForm">
+
+        Name:<input type = "text" id = "fname"/>
+
+        <br><br>
+
+        Age: <input type = "text" id = "age"
+            onChange = "checkAge(this.value);"/>
+
+        <br><br>
+
+        Height:<select id = "Feet"><br/>
+
+            <option value = "4"> 4' </option><br/>
+
+            <option value = "5"> 5' </option><br/>
+
+            <option value = "6"> 6' </option><br/>
+
+            </select>
+
+            <select id = "inches"><br/>
+
+            <option value = "0"> 0'' </option><br/>
+
+            <option value = "1"> 1'' </option><br/>
+
+            <option value = "2"> 2'' </option><br/>
+
+            <option value = "3"> 3'' </option><br/>
+
+            <option value = "4"> 4'' </option><br/>
+
+            <option value = "5"> 5'' </option><br/>
+
+            <option value = "6"> 6'' </option><br/>
+
+            <option value = "7"> 7'' </option><br/>
+
+            <option value = "8"> 8'' </option><br/>
+
+            <option value = "9"> 9'' </option><br/>
+
+            <option value = "10"> 10'' </option><br/>
+
+            <option value = "11"> 11'' </option><br/>
+
+            </select>
+
+        
+          
+          Start Date:<input type = "date" id = "startDate" onClick = "checkStartDate(this.value)"/>
+
+          <input type = "button" id = "Reset" onClick = "resetForm()" value = "Reset"/>
+
+          <input type = "button" id = "Display" onClick = "addRow()" value = "Display"/>
+
+        </form>
+
+    </div>
+
+
+
+        
+    <!-- creates the table with caption that displays number of rows in the table-->
+        <table id = "myTable">
+        <caption id = "count"> 0 </caption>
+        <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Height</th>
+        <th>Start Date</th>
+        </tr>
+        </table>
+
+
+
+</body>
+
+</html>

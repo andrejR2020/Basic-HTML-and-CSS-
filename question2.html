@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 1 Q2</title>
+<style type="text/css">
+#container div {
+  width: 100px;
+  height: 100px;
+  float: left;
+  text-align:center;
+  line-height:100px;
+  font-style: sans-serif;
+  font-size: 40px;
+  /* Andrejs Romanovskis
+@version 27/02/2020*/    
+    
+/* sets initial design for the table 
+its background colors and borders/size
+*/
+}
+</style>
+<script type="text/javascript">
+var size = 0;
+    // deletes all the boxes if there is any
+    //reads the customers input and loops until correct amount of boxes been drawn
+    //implements random rgb, so everytime boxes will have random colour
+    // doubles the margin in between the boxes
+function main() {
+    var marg = "5";
+    while (container.children.length > 0) {
+    container.removeChild(container.firstElementChild);
+	}
+    size = document.getElementById("yy").value;
+    for (var i = 1; i <= size; i++) {
+	var box = document.createElement("div");
+	box.innerHTML = i;
+    var r = Math.round(Math.random()*255);
+	var g = Math.round(Math.random()*255);
+	var b = Math.round(Math.random()*255);
+    box.style.background = "rgb(" + r + "," + g + "," + b + ")";
+        
+      
+    box.style.marginLeft = marg + "px"; 
+    marg = (marg *2); 
+   
+	container.appendChild(box);
+    }
+}
+</script>
+</head>
+<body>
+    <input name="size" id = "yy" type="text" />
+    <input type="button" value="Draw" onClick="main();" />
+    <br>
+    <br>
+    <div id="container">
+    </div>
+</body>
+</html>
