@@ -1,0 +1,37 @@
+Andrejs Romanovskis (ar665)
+
+Task 1
+
+select a.name, a.weighting
+from Assessment a
+inner join Course c on a.cid = c.cid
+where c.title = "Database systems"
+order by name;
+
+Task 2
+
+select a.cid, a.name, avg(g.mark) Mark
+from Grade g
+inner join Assessment a on g.aid = a.aid
+group by a.cid, a.name
+order by a.cid, a.name;
+
+Task 3
+a)
+
+select a.cid, c.title, a.name, a.weighting, g.mark
+from Grade g
+inner join Assessment a on g.aid = a.aid
+inner join Course c on a.cid = c.cid
+inner join Student s on g.sid = s.sid
+where s.sid = "S0001";
+
+Task 3
+b)
+
+select a.cid, sum((g.mark * a.weighting)/100) FinalResult
+from Grade g
+inner join Assessment a on g.aid = a.aid
+inner join Student s on g.sid = s.sid
+where s.sid = "S0001"
+group by a.cid;
